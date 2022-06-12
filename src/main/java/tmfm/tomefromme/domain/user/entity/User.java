@@ -4,10 +4,14 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import tmfm.tomefromme.domain.admin.entity.Admin;
 import tmfm.tomefromme.domain.base.BaseEntity;
+import tmfm.tomefromme.domain.letter.entity.Letter;
 import tmfm.tomefromme.domain.role.entity.Role;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,9 +19,7 @@ import javax.persistence.*;
 public class User extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
-
-    private Object roleId;
+    private Long id;
 
     @Column(name = "social_id", length = 20)
     private String socialId;
@@ -38,13 +40,21 @@ public class User extends BaseEntity {
     }
 
     @Builder
-    public User(Long userId, Role roleId, String socialId, char socialType, String userEmail, char userYn) {
-        this.userId = userId;
-        this.roleId = roleId;
+    public User(Long id, String socialId, char socialType, String userEmail, char userYn) {
+        this.id = id;
         this.socialId = socialId;
         this.socialType = socialType;
         this.userEmail = userEmail;
         this.userYn = userYn;
     }
 
+    @OneToMany(mappedBy = "user")
+    private List<Letter> letterList = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "roleId")
+    private Role role;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Admin admin;
 }

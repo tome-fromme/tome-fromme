@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import tmfm.tomefromme.domain.base.BaseEntity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,9 +16,7 @@ import javax.persistence.*;
 public class Notice extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long noticeId;
-
-    private Object noticeImgId;
+    private Long id;
 
     @Column(name = "notice_title", length = 50)
     private String noticeTitle;
@@ -25,11 +25,13 @@ public class Notice extends BaseEntity {
     private String noticeContent;
 
     @Builder
-    public Notice(Long noticeId, Object noticeImgId, String noticeTitle, String noticeContent) {
-        this.noticeId = noticeId;
-        this.noticeImgId = noticeImgId;
+    public Notice(Long id, String noticeTitle, String noticeContent) {
+        this.id = id;
         this.noticeTitle = noticeTitle;
         this.noticeContent = noticeContent;
     }
+
+    @OneToMany(mappedBy = "notice")
+    private List<NoticeImg> noticeImgList = new ArrayList<>();
 
 }

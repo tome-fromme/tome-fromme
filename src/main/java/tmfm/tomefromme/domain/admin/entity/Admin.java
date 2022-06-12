@@ -10,7 +10,7 @@ public class Admin extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long adminId;
+    private Long id;
 
     @Column(length = 20)
     private String adminName;
@@ -24,8 +24,8 @@ public class Admin extends BaseEntity {
     @Column(length = 20)
     private String adminPhone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
 }
