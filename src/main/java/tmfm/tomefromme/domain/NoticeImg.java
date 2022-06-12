@@ -18,4 +18,8 @@ public class NoticeImg extends BaseEntity {
     private String savedImgName;
     private String imgUrl;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "noticeId")
+    private Notice notice;
 }

@@ -10,7 +10,7 @@ public class LetterImg extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long letterImgId;
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String originalImgName;
@@ -22,7 +22,7 @@ public class LetterImg extends BaseEntity {
     private String imgUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "letterId", nullable = false)
     private Letter letter;
 
 }

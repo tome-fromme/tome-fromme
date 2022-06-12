@@ -3,9 +3,13 @@ package tmfm.tomefromme.domain.letter.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import tmfm.tomefromme.domain.base.BaseEntity;
+import tmfm.tomefromme.domain.letterImg.entity.LetterImg;
+import tmfm.tomefromme.domain.user.entity.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,7 +29,7 @@ public class Letter extends BaseEntity {
     private LocalDateTime letterOpenDay;
 
     @Column(nullable = false, length = 2)
-    private String LetterSendYn;
+    private String letterSendYn;
 
     @Column(nullable = false, length = 2)
     private String useYn;
@@ -34,4 +38,11 @@ public class Letter extends BaseEntity {
     private String locationY;
     private String locationName;
     private String locationId;
+
+    @OneToMany(mappedBy = "letter")
+    private List<LetterImg> letterImgList = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
 }
