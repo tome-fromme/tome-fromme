@@ -1,11 +1,11 @@
 package tmfm.tomefromme.domain.admin.entity;
 
 import tmfm.tomefromme.domain.base.BaseEntity;
+import tmfm.tomefromme.domain.user.entity.User;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "admin")
 public class Admin extends BaseEntity {
 
     @Id
@@ -24,6 +24,8 @@ public class Admin extends BaseEntity {
     @Column(length = 20)
     private String adminPhone;
 
-    //    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", nullable = false)
+    private User user;
 
 }

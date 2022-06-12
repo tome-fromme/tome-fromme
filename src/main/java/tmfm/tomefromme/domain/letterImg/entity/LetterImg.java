@@ -1,11 +1,11 @@
 package tmfm.tomefromme.domain.letterImg.entity;
 
 import tmfm.tomefromme.domain.base.BaseEntity;
+import tmfm.tomefromme.domain.letter.entity.Letter;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "letter_img")
 public class LetterImg extends BaseEntity {
 
     @Id
@@ -18,8 +18,11 @@ public class LetterImg extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String savedImgName;
 
+    @Column(nullable = false)
     private String imgUrl;
 
-//    private Letter letter;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", nullable = false)
+    private Letter letter;
 
 }
