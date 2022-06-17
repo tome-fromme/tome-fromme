@@ -1,4 +1,4 @@
-package tmfm.tomefromme.domain;
+package tmfm.tomefromme.domain.notice.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
