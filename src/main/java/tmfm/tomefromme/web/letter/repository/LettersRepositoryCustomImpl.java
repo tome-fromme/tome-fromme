@@ -17,6 +17,8 @@ public class LettersRepositoryCustomImpl implements LettersRepositoryCustom {
 
     @Override
     public Page<LettersDto> getLetters(String userEmail, Pageable pageable) {
+
+        //TODO - 편지 리스트 queryDsl 구현
         return null;
     }
 }
