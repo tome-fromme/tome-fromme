@@ -29,7 +29,6 @@ public class LettersController {
     public ResponseEntity getLetters(Optional<Integer> page,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-
         try {
             String userEmail = userDetails.getUsername();
             Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 10);
