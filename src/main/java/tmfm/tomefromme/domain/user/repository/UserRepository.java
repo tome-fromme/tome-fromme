@@ -5,7 +5,7 @@ import tmfm.tomefromme.domain.user.entity.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUserEmail(String userEmail);
 }
