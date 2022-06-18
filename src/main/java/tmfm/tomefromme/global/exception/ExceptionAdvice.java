@@ -14,7 +14,7 @@ public class ExceptionAdvice {
                 .errorMessage(ex.getErrorMessage())
                 .build();
         
-        return ResponseEntity.status(ex.getHttpStatus()).body(se);
+        return ResponseEntity.ok().body(ex.getErrorMessage());
     }
 
     @ExceptionHandler(Exception.class)
