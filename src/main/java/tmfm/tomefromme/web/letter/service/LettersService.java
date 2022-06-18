@@ -1,27 +1,39 @@
 package tmfm.tomefromme.web.letter.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tmfm.tomefromme.domain.letter.entity.Letter;
+import tmfm.tomefromme.domain.letter.repository.LetterRepository;
+import tmfm.tomefromme.domain.user.entity.User;
+import tmfm.tomefromme.domain.user.repository.UserRepository;
+import tmfm.tomefromme.global.error.exception.EntityNotFoundException;
+import tmfm.tomefromme.global.error.exception.ErrorCode;
 import tmfm.tomefromme.web.letter.dto.LettersDto;
-import tmfm.tomefromme.web.letter.repository.LettersRepository;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class LettersService {
 
-    private final LettersRepository lettersRepository;
+    private final UserRepository userRepository;
 
-    public Page<LettersDto> getLetters(String userEmail, Pageable pageable) throws IOException {
+    private final LetterRepository letterRepository;
 
-        Page<LettersDto> lettersDtoPageable = lettersRepository.getLetters(userEmail, pageable);
+    public LettersDto getLetters(String userEmail) throws IOException {
 
-        return lettersDtoPageable;
+        User user = userRepository.findByUserEmail(userEmail)
+                .orElseThrow(() -> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));
+
+        List<Letter> letters = letterRepository.findAllByUser(user);
+
+        //TODO
+        LettersDto lettersDto = LettersDto.builder().build();
+
+        return lettersDto;
 
     }
 }
