@@ -8,13 +8,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import tmfm.tomefromme.domain.letter.entity.Letter;
 import tmfm.tomefromme.global.security.UserDetailsImpl;
 import tmfm.tomefromme.web.letter.dto.LettersDto;
 import tmfm.tomefromme.web.letter.service.LettersService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -38,5 +39,10 @@ public class LettersController {
             log.error(e.getMessage());
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @PostMapping("/letter")
+    public void createLetter(@RequestParam Letter letter, @RequestParam List<MultipartFile> multipartFileList) {
+        lettersService.createLetter(letter, multipartFileList);
     }
 }
