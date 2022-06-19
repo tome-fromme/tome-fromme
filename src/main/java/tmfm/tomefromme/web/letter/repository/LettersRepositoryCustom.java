@@ -6,5 +6,5 @@ import tmfm.tomefromme.web.letter.dto.LettersDto;
 
 public interface LettersRepositoryCustom {
 
-    Page<LettersDto> getLetters(String userEmail, Pageable pageable);
+    Page<LettersDto> getLetters(Long userId, Pageable pageable);
 }
