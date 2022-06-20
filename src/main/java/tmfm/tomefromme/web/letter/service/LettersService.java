@@ -1,6 +1,7 @@
 package tmfm.tomefromme.web.letter.service;
 
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import tmfm.tomefromme.domain.letter.entity.Letter;
+import tmfm.tomefromme.global.error.exception.BusinessException;
+import tmfm.tomefromme.global.error.exception.ErrorCode;
 import tmfm.tomefromme.web.letter.dto.LettersDto;
 import tmfm.tomefromme.web.letter.repository.LettersRepository;
 
@@ -26,27 +29,11 @@ public class LettersService {
 
     private final LettersRepository lettersRepository;
 
-    public Page<LettersDto> getLetters(String userEmail, Pageable pageable) throws IOException {
+    public Page<LettersDto> getLetters(String userEmail, Pageable pageable) {
 
         Page<LettersDto> lettersDtoPageable = lettersRepository.getLetters(userEmail, pageable);
 
         return lettersDtoPageable;
     }
 
-    @Transactional
-    public void createLetter(Letter letter, List<MultipartFile> multipartFileList) {
-        String uploadDir = "jiw";
-
-        lettersRepository.save(letter);
-
-        multipartFileList.forEach(multipartFile -> {
-            Path copyOfLocation = Paths.get(uploadDir + File.separator + StringUtils.cleanPath(multipartFile.getOriginalFilename()));
-            try {
-                Files.copy(multipartFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-//                ErrorCode errorCode = new ErrorCode(123, "");
-//                throw new BusinessException(new ErrorCode(000, "e"));
-            }
-        });
-    }
 }

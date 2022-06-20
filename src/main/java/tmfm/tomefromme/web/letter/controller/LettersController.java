@@ -41,8 +41,4 @@ public class LettersController {
         }
     }
 
-    @PostMapping("/letter")
-    public void createLetter(@RequestParam Letter letter, @RequestParam List<MultipartFile> multipartFileList) {
-        lettersService.createLetter(letter, multipartFileList);
-    }
 }
