@@ -3,6 +3,7 @@ package tmfm.tomefromme.web.letter.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,6 +34,8 @@ public class LettersDto {
     private String locationId;
 
     private List<LetterImgDto> letterImgDtos;
+
+    private List<MultipartFile> multipartFileList;
 
     @Getter
     @Setter

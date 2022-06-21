@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import tmfm.tomefromme.domain.letter.entity.Letter;
+import tmfm.tomefromme.web.letter.dto.LettersDto;
 import tmfm.tomefromme.web.letter.repository.LetterRepository;
 
 import java.io.File;
@@ -21,13 +22,13 @@ public class LetterService {
 
     private final LetterRepository letterRepository;
 
-    public void createLetter(Letter letter, List<MultipartFile> multipartFileList) {
+    public void createLetter(LettersDto letter) {
         String uploadDir = "jiw";
 
         letterRepository.save(letter);
 
         //파일 작성기능 공통으로 빼기
-        multipartFileList.forEach(multipartFile -> {
+        letter.getMultipartFileList().forEach(multipartFile -> {
             Path copyOfLocation = Paths.get(uploadDir + File.separator + StringUtils.cleanPath(multipartFile.getOriginalFilename()));
             try {
                 Files.copy(multipartFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
