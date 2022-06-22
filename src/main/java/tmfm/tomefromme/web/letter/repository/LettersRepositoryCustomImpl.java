@@ -20,7 +20,7 @@ public class LettersRepositoryCustomImpl implements LettersRepositoryCustom {
     }
 
     @Override
-    public Page<LettersDto> getLetters(String userEmail, Pageable pageable) {
+    public Page<LettersDto> getLetters(Long userId, Pageable pageable) {
 
         QLetter letter = QLetter.letter;
 
@@ -32,7 +32,7 @@ public class LettersRepositoryCustomImpl implements LettersRepositoryCustom {
                         letter.letterOpenDay.as("letterOpenDay"),
                         letter.letterSendYn.as("letterSendYn")))
                 .from(letter)
-                .where(letter.user.userEmail.eq(userEmail))
+                .where(letter.user.id.eq(userId))
                 .orderBy(letter.id.asc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -46,7 +46,7 @@ public class LettersRepositoryCustomImpl implements LettersRepositoryCustom {
                         letter.letterOpenDay.as("letterOpenDay"),
                         letter.letterSendYn.as("letterSendYn")))
                 .from(letter)
-                .where(letter.user.userEmail.eq(userEmail))
+                .where(letter.user.id.eq(userId))
                 .fetch().size();
 
         return new PageImpl<>(results, pageable, totalSize);
