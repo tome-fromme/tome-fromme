@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
+import tmfm.tomefromme.domain.letter.entity.Letter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +37,20 @@ public class LettersDto {
     private List<LetterImgDto> letterImgDtos;
 
     private List<MultipartFile> multipartFileList;
+
+    public Letter toEntity() {
+        return Letter.builder()
+                .letterTitle(this.letterTitle)
+                .letterContent(this.letterContent)
+                .letterOpenDay(this.letterOpenDay)
+                .letterSendYn(this.letterSendYn)
+                .useYn(this.useYn)
+                .locationX(this.locationX)
+                .locationY(this.locationY)
+                .locationName(this.locationName)
+                .locationId(this.locationId)
+                .build();
+    }
 
     @Getter
     @Setter
