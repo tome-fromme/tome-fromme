@@ -52,6 +52,15 @@ public class LettersDto {
                 .build();
     }
 
+    public Letter updateLetter(Letter letter) {
+        return Letter.builder()
+                .id(letter.getId())
+                .letterTitle(this.letterTitle)
+                .letterContent(this.letterContent)
+                .useYn(this.useYn)
+                .build();
+    }
+
     @Getter
     @Setter
     @Builder

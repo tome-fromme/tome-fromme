@@ -49,7 +49,8 @@ public class Letter extends BaseEntity {
     private User user;
 
     @Builder
-    public Letter(String letterTitle, String letterContent, LocalDateTime letterOpenDay, String letterSendYn, String useYn, String locationX, String locationY, String locationName, String locationId, List<LetterImg> letterImgList, User user) {
+    public Letter(Long id, String letterTitle, String letterContent, LocalDateTime letterOpenDay, String letterSendYn, String useYn, String locationX, String locationY, String locationName, String locationId, List<LetterImg> letterImgList, User user) {
+        this.id = id;
         this.letterTitle = letterTitle;
         this.letterContent = letterContent;
         this.letterOpenDay = letterOpenDay;

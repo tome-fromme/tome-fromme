@@ -43,6 +43,7 @@ public class LetterService {
         Letter letter = letterRepository.findById(letterId)
                 .orElseThrow(NoSuchElementException::new);
 
-
+        Letter updateLetter = lettersDto.updateLetter(letter);
+        letterRepository.save(updateLetter);
     }
 }
