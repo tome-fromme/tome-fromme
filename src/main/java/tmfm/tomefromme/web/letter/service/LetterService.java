@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +37,12 @@ public class LetterService {
 //                throw new BusinessException(ErrorCode.MEMBER_NOT_EXIST);
             }
         });
+    }
+
+    public void updateLetter(Long letterId, LettersDto lettersDto) {
+        Letter letter = letterRepository.findById(letterId)
+                .orElseThrow(NoSuchElementException::new);
+
+
     }
 }

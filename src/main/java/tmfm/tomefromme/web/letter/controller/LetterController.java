@@ -2,9 +2,7 @@ package tmfm.tomefromme.web.letter.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tmfm.tomefromme.web.letter.dto.LettersDto;
 import tmfm.tomefromme.web.letter.service.LetterService;
 
@@ -16,8 +14,12 @@ public class LetterController {
 
     @PostMapping("/letter")
     public void createLetter(@RequestParam LettersDto letter) {
-        //todo letter -> entity로 변경하고 crud 작업
         letterService.createLetter(letter);
+    }
+
+    @PutMapping("/letter/{letterId}")
+    public void updateLetter(@PathVariable Long letterId, @RequestBody LettersDto lettersDto) {
+        letterService.updateLetter(letterId, lettersDto);
     }
 
 }
