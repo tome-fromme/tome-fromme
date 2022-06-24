@@ -1,4 +1,4 @@
-package tmfm.tomefromme.global.security;
+package tmfm.tomefromme.global.config.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
