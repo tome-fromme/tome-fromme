@@ -8,18 +8,25 @@ import tmfm.tomefromme.web.letter.service.LetterService;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/user")
 public class LetterController {
 
     private final LetterService letterService;
 
-    @PostMapping("/letter")
-    public void createLetter(@RequestParam LettersDto letter) {
+    @PostMapping("/letters")
+    public void createLetter(@RequestBody LettersDto letter) {
         letterService.createLetter(letter);
     }
 
-    @PutMapping("/letter/{letterId}")
+    @PutMapping("/letters/{letterId}")
     public void updateLetter(@PathVariable Long letterId, @RequestBody LettersDto lettersDto) {
         letterService.updateLetter(letterId, lettersDto);
     }
+
+    @DeleteMapping("/letters/{letterId}")
+    public void deleteLetter(@PathVariable Long letterId) {
+        letterService.deleteLetter(letterId);
+    }
+
 
 }

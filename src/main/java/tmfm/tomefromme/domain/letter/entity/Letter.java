@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import tmfm.tomefromme.domain.base.BaseEntity;
 import tmfm.tomefromme.domain.letterImg.entity.LetterImg;
 import tmfm.tomefromme.domain.user.entity.User;
-import tmfm.tomefromme.web.letter.dto.LettersDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -41,7 +40,7 @@ public class Letter extends BaseEntity {
     private String locationName;
     private String locationId;
 
-    @OneToMany(mappedBy = "letter")
+    @OneToMany(mappedBy = "letter", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LetterImg> letterImgList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

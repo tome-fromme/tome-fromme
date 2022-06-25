@@ -45,5 +45,14 @@ public class LetterService {
 
         Letter updateLetter = lettersDto.updateLetter(letter);
         letterRepository.save(updateLetter);
+
+        //부모에서 변경해도 변경은 되겠지만 ImgList도 따로 update 후 letter update로 변경
+    }
+
+    public void deleteLetter(Long letterId) {
+        Letter letter = letterRepository.findById(letterId)
+                .orElseThrow(NoSuchElementException::new);
+
+        letterRepository.delete(letter);
     }
 }
