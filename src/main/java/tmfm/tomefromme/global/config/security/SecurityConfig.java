@@ -37,6 +37,7 @@ public class SecurityConfig {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
+                .cors().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new AuthenticationEntryPointImpl())
         ;
