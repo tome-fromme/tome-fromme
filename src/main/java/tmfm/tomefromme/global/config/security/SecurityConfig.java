@@ -33,7 +33,7 @@ public class SecurityConfig {
         ;
 
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/register", "/images/**").permitAll()
+                .antMatchers("/", "/login", "/register", "/images/**", "/api/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
