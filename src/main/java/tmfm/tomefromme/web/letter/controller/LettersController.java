@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import tmfm.tomefromme.global.security.UserDetailsImpl;
+import tmfm.tomefromme.global.config.security.UserDetailsImpl;
 import tmfm.tomefromme.web.letter.dto.LettersDto;
 import tmfm.tomefromme.web.letter.service.LettersService;
 
