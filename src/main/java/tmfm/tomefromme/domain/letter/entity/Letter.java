@@ -1,5 +1,6 @@
 package tmfm.tomefromme.domain.letter.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import tmfm.tomefromme.domain.base.BaseEntity;
@@ -39,10 +40,24 @@ public class Letter extends BaseEntity {
     private String locationName;
     private String locationId;
 
-    @OneToMany(mappedBy = "letter")
+    @OneToMany(mappedBy = "letter", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LetterImg> letterImgList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
+
+    @Builder
+    public Letter(Long id, String letterTitle, String letterContent, LocalDateTime letterOpenDay, String letterSendYn, String useYn, String locationX, String locationY, String locationName, String locationId, List<LetterImg> letterImgList, User user) {
+        this.id = id;
+        this.letterTitle = letterTitle;
+        this.letterContent = letterContent;
+        this.letterOpenDay = letterOpenDay;
+        this.letterSendYn = letterSendYn;
+        this.useYn = useYn;
+        this.locationX = locationX;
+        this.locationY = locationY;
+        this.locationName = locationName;
+        this.locationId = locationId;
+    }
 }
